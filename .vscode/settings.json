@@ -1,0 +1,6 @@
+{
+    "markdown.marp.themes": [
+        "your-theme.css",
+        "gradient-blue.css"
+    ]
+}

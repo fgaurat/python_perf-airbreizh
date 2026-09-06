@@ -1,0 +1,47 @@
+# Pipeline de la todo-list, centrée sur les rapports.
+
+stages: [test]
+
+image: python:3.12-slim
+
+variables:
+  UV_CACHE_DIR: .uv-cache
+  UV_LINK_MODE: copy
+
+default:
+  before_script:
+    - pip install --no-cache-dir uv
+    - uv sync --frozen
+  cache:
+    key:
+      files: [uv.lock]
+    paths: [.uv-cache]
+
+tests:
+  stage: test
+  script:
+    - uv run pytest
+      --junitxml=rapport.xml
+      --cov=src
+      --cov-report=xml
+      --cov-report=term-missing
+      --cov-fail-under=90
+  # Extrait le pourcentage du journal pour le badge de la merge request.
+  coverage: '/TOTAL.*\s+(\d+%)$/'
+  artifacts:
+    # SANS `when: always`, aucun rapport n'est récupéré quand le job échoue —
+    # c'est-à-dire précisément quand on en a besoin.
+    when: always
+    expire_in: 30 days
+    paths:
+      - rapport.xml
+      - coverage.xml
+    reports:
+      junit: rapport.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
+
+# `--cov-fail-under=90` est un CLIQUET, pas un objectif :
+# la couverture actuelle est de 97 %, le seuil est réglé juste en dessous.
+# Il n'impose pas de progresser ; il empêche de régresser.

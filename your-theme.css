@@ -1,0 +1,78 @@
+/* @theme your-theme */
+
+@import 'gradient-blue';
+/* @import 'default'; */
+
+
+
+
+/* Supprimer la marge haute du premier H1 pour coller au bord supérieur */
+section > h1:first-child,
+section.lead > h1:first-child {
+  margin-top: 0;
+}
+
+/* Densité globale : plus de hauteur utile, police légèrement réduite */
+section {
+  font-size: 20px;
+  padding: 50px 70px 55px;
+}
+section p {
+  max-width: 100%;   /* annule le max-width: 90% de gradient-blue */
+}
+
+
+h1 {
+  color: red;
+}
+
+h2 {
+  color: darkblue;
+}
+h3 {
+  color: navy;
+}
+code,
+pre {
+  font-size: 0.45em;
+}
+
+
+pre{
+  overflow: auto;
+}
+
+/* Classe pour les slides denses — à utiliser avec <!-- _class: dense --> */
+section.dense {
+  font-size: 17px;
+  line-height: 1.25;
+  padding: 45px 60px 50px;   /* récupère ~70px de hauteur utile */
+}
+section.dense table { font-size: 0.9em; }
+section.dense h1 { font-size: 1.8em; margin: 0.25em 0; }
+section.dense h2 { font-size: 1.35em; margin: 0.15em 0; }
+section.dense h3 { font-size: 1.2em; margin: 0.15em 0; }
+section.dense p { margin: 0.25em 0; }
+section.dense li { margin: 0.05em 0; }
+section.dense pre { font-size: 0.4em; }
+section.dense code { font-size: 0.9em; }
+/* Mise en colonnes : <div class="cols"> … </div> avec deux <div> enfants.
+   Utilisée pour les comparaisons « code avant / code après ». */
+section .cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2em;
+  align-items: start;
+}
+section .cols > div > *:first-child { margin-top: 0; }
+section .cols pre { font-size: 0.4em; }
+section.dense .cols pre { font-size: 0.36em; }
+
+/* Encarts récurrents */
+section blockquote {
+  border-left: 4px solid #3399ff;
+  margin: 0.5em 0;
+  padding: 0.1em 0 0.1em 0.9em;
+  color: #444;
+  font-style: normal;
+}

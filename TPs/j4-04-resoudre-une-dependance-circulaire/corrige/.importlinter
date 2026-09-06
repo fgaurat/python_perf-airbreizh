@@ -1,0 +1,10 @@
+[importlinter]
+root_package = gestion
+
+[importlinter:contract:couches]
+name = Architecture en couches — les imports ne vont que vers le bas
+type = layers
+layers =
+    gestion.service
+    gestion.projets | gestion.affichage
+    gestion.modele

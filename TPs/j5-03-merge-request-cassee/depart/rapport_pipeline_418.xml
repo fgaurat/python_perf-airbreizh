@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="25" time="0.077" timestamp="2026-09-06T10:38:39.897180+02:00" hostname="Mac-Studio-de-Frederic.local"><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_temperatures[gel_en_fahrenheit]" time="0.000" /><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_temperatures[ebullition_en_fahrenheit]" time="0.001" /><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_temperatures[le_point_commun]" time="0.000" /><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_temperatures[corps_humain]" time="0.000" /><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_temperatures[gel_en_kelvin]" time="0.000" /><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_temperatures[zero_absolu]" time="0.000" /><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_temperatures[kelvin_vers_fahrenheit]" time="0.000" /><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_temperatures[identite]" time="0.000" /><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_unite_de_temperature_inconnue" time="0.000" /><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_longueurs[km_vers_m]" time="0.000" /><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_longueurs[m_vers_km]" time="0.000" /><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_longueurs[mile_vers_km]" time="0.000" /><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_longueurs[km_vers_mile]" time="0.000" /><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_longueurs[nautique_vers_km]" time="0.000" /><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_longueurs[km_vers_nautique]" time="0.000" /><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_longueurs[nautique_vers_mile]" time="0.000" /><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_longueurs[identite]" time="0.000" /><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_pouce_vers_centimetre" time="0.000"><failure message="assert 0.0 == 2.54 ± 2.5e-06&#10;  &#10;  comparison failed&#10;  Obtained: 0.0&#10;  Expected: 2.54 ± 2.5e-06">def test_pouce_vers_centimetre():
+&gt;       assert convertir_longueur(1, "in", "cm") == pytest.approx(2.54)
+E       assert 0.0 == 2.54 ± 2.5e-06
+E         
+E         comparison failed
+E         Obtained: 0.0
+E         Expected: 2.54 ± 2.5e-06
+
+tests/test_j5_03_convertisseur.py:62: AssertionError</failure></testcase><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_pied_vers_metre" time="0.000"><failure message="assert 0.3 == 0.3048 ± 3.0e-07&#10;  &#10;  comparison failed&#10;  Obtained: 0.3&#10;  Expected: 0.3048 ± 3.0e-07">def test_pied_vers_metre():
+&gt;       assert convertir_longueur(1, "ft", "m") == pytest.approx(0.3048)
+E       assert 0.3 == 0.3048 ± 3.0e-07
+E         
+E         comparison failed
+E         Obtained: 0.3
+E         Expected: 0.3048 ± 3.0e-07
+
+tests/test_j5_03_convertisseur.py:66: AssertionError</failure></testcase><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_millimetre_vers_metre" time="0.000"><failure message="assert 0.0 == 0.001 ± 1.0e-09&#10;  &#10;  comparison failed&#10;  Obtained: 0.0&#10;  Expected: 0.001 ± 1.0e-09">def test_millimetre_vers_metre():
+&gt;       assert convertir_longueur(1, "mm", "m") == pytest.approx(0.001)
+E       assert 0.0 == 0.001 ± 1.0e-09
+E         
+E         comparison failed
+E         Obtained: 0.0
+E         Expected: 0.001 ± 1.0e-09
+
+tests/test_j5_03_convertisseur.py:70: AssertionError</failure></testcase><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_centimetre_vers_pouce" time="0.000"><failure message="assert 0.0 == 1.0 ± 1.0e-06&#10;  &#10;  comparison failed&#10;  Obtained: 0.0&#10;  Expected: 1.0 ± 1.0e-06">def test_centimetre_vers_pouce():
+&gt;       assert convertir_longueur(2.54, "cm", "in") == pytest.approx(1.0)
+E       assert 0.0 == 1.0 ± 1.0e-06
+E         
+E         comparison failed
+E         Obtained: 0.0
+E         Expected: 1.0 ± 1.0e-06
+
+tests/test_j5_03_convertisseur.py:74: AssertionError</failure></testcase><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_unite_de_longueur_inconnue" time="0.000" /><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_convertir_choisit_la_famille" time="0.000" /><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_convertir_refuse_de_melanger_les_familles" time="0.000" /><testcase classname="j5-03-merge-request-cassee.depart.tests.test_j5_03_convertisseur" name="test_convertir_unite_inconnue" time="0.000" /></testsuite></testsuites>

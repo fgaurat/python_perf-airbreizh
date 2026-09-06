@@ -1,0 +1,92 @@
+# Pipeline du package calculatrice.
+#
+# Trois stages : la qualité échoue vite et sans installer grand-chose,
+# les tests ne démarrent que si elle est verte, le packaging clôt la chaîne.
+
+stages:
+  - qualite
+  - test
+  - packaging
+
+image: python:3.12-slim
+
+variables:
+  UV_CACHE_DIR: .uv-cache
+  UV_LINK_MODE: copy # évite les avertissements de lien dur en conteneur
+  PYTHONDONTWRITEBYTECODE: "1"
+
+default:
+  before_script:
+    - pip install --no-cache-dir uv
+    - uv sync --frozen # installe EXACTEMENT ce que décrit uv.lock
+  cache:
+    key:
+      files:
+        - uv.lock
+    paths:
+      - .uv-cache
+
+# --- Qualité : trois jobs en parallèle, quelques secondes chacun -------------
+
+format:
+  stage: qualite
+  script:
+    - uv run ruff format --check .
+
+lint:
+  stage: qualite
+  script:
+    - uv run ruff check .
+
+types:
+  stage: qualite
+  script:
+    - uv run mypy src
+
+# --- Tests -------------------------------------------------------------------
+
+tests:
+  stage: test
+  script:
+    - uv run pytest --junitxml=rapport.xml --cov=src --cov-report=xml --cov-report=term
+  coverage: '/TOTAL.*\s+(\d+%)$/'
+  artifacts:
+    when: always # sans cette ligne, pas de rapport en cas d'échec
+    expire_in: 30 days
+    paths:
+      - rapport.xml
+      - coverage.xml
+    reports:
+      junit: rapport.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
+
+# La matrice reflète les versions réellement utilisées par les projets
+# consommateurs — pas celles supportées en amont.
+tests_multi_versions:
+  stage: test
+  image: python:$VERSION_PYTHON-slim
+  parallel:
+    matrix:
+      - VERSION_PYTHON: ["3.10", "3.11", "3.12", "3.13"]
+  script:
+    - uv run pytest -q
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+# --- Packaging ---------------------------------------------------------------
+
+build:
+  stage: packaging
+  script:
+    - uv build
+    - ls -l dist/
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 week
+  rules:
+    - if: $CI_COMMIT_TAG
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

@@ -1,0 +1,38 @@
+[project]
+name = "tps-python-avance"
+version = "0.1.0"
+description = "Travaux pratiques — Python avancé : qualité, TDD, design patterns, CI/CD"
+requires-python = ">=3.12,<3.13"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=8.2",
+    "pytest-cov>=5.0",
+    "ruff>=0.6",
+    "mypy>=1.11",
+    "import-linter>=2.0",
+    "pyyaml>=6.0",
+]
+
+[tool.pytest.ini_options]
+# Les dossiers `depart/` contiennent volontairement du code non fini :
+# ils sont exclus de la collecte pour qu'un `pytest` global reste vert.
+# Les TPs du Jour 5 sont des projets autonomes (leur propre venv, leur propre lock) :
+# ils se lancent depuis leur dossier, pas depuis la racine.
+norecursedirs = ["depart", "j5-*", ".git", ".venv", "__pycache__", "node_modules"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+# Les dossiers `depart/` contiennent du code volontairement fautif :
+# ils sont exclus du lint, seuls les corrigés doivent être propres.
+extend-exclude = ["**/depart"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
