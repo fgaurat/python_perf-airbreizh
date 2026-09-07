@@ -32,3 +32,9 @@ TPs/**/rapport_*.json
 # Archive locale de la première version des TPs (452 Mo avec ses venvs) et cache d'outillage
 AirBreizhTPs/
 .playwright-mcp/
+
+# TPs_reels : environnement et fichiers produits en lançant les main.py
+TPs_reels/tp2/.venv/
+TPs_reels/**/todos.db
+TPs_reels/**/restantes.txt
+TPs_reels/**/sortie.txt
