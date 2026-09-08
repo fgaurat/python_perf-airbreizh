@@ -48,14 +48,29 @@ d'attaquer les patterns.
 
 ## Mise en place (une seule fois)
 
-Python 3.10 ou plus.
+Python 3.10 ou plus. Vérifiez d'abord quelle version répond, le `python`
+par défaut est souvent plus ancien :
+
+```bash
+python --version
+python3 --version
+python3.12 --version             # ou python3.11, python3.10
+```
+
+Créez le venv avec un interpréteur assez récent, nommé explicitement :
 
 ```bash
 cd TPs_reels/tp2
-python -m venv .venv
+python3.12 -m venv .venv         # remplacer par la version trouvée ci-dessus
 source .venv/bin/activate        # Windows : .venv\Scripts\activate
-pip install pytest
+python -m pip install pytest
+python --version                 # doit afficher la version du venv
 ```
+
+À refaire à chaque nouveau terminal : seulement la ligne `source`.
+
+Symptôme d'un venv oublié : `No module named pytest`, ou des erreurs sur des
+annotations comme `list[Todo]` ou `float | None` avec un Python trop ancien.
 
 ## Structure d'un TP
 
